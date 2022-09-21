@@ -1,10 +1,3 @@
-//
-//  Persistence.swift
-//  YA APOD SUI
-//
-//  Created by Andrew Us on 21.09.2022.
-//
-
 import CoreData
 
 struct PersistenceController {
