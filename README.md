@@ -1,4 +1,9 @@
-# YA-APOD-SUI
-Astronomic Picture Of the Day (APOD) by NASA API
+# YA APOD SUI
+Yet Another **Astronomic Picture Of the Day** (APOD) by NASA API
 
 It's my diplom project rewritten on SwiftUI.
+
+
+## Logo
+![Logo](/YA%20APOD%20SUI/Utilities/Assets.xcassets/AppIcon.appiconset/nasa-logo-v-02.png)
+
