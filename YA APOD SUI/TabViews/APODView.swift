@@ -5,11 +5,26 @@ struct APODView: View {
     @State private var currAPOD: APODInstance = APODInstance.loading
     @State private var currImage: UIImage = UIImage(named: "nasa-logo.svg")!
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
     @State private var isFavorite: Bool = false
-    @ViewBuilder
-    var likeButton: some View {
+    @ViewBuilder var likeButton: some View {
         Button {
-            isFavorite = !isFavorite
+            if !isFavorite {
+                isFavorite = true
+                let newItem = Item(context: viewContext)
+                newItem.timestamp = Date()
+                newItem.title = currAPOD.title
+                newItem.image = currImage.pngData()
+                
+                do {
+                    try viewContext.save()
+                    print("Image saved to CoreData: \(currAPOD.title).")
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+            }
         } label: {
             Image(systemName: isFavorite ? "suit.heart.fill" : "suit.heart")
                 .foregroundColor(.primary)
@@ -48,7 +63,7 @@ struct APODView: View {
             }
             .onAppear {
                 Task {
-                    if currAPOD.date == "1900-01-01" {
+                    if currAPOD.date == "Houstone" {
                         (currAPOD, currImage) = try await fetchImageOfTheDay()
                     }
                 }
@@ -64,11 +79,9 @@ struct APODView: View {
         let (apodData, _) = try await URLSession.shared.data(from: URL(string: "\(AppConstants.NASA.defaultNASAUrl)?api_key=\(AppConstants.NASA.myAPIKEY)")!)
         
         currentAPODOfTheDay = try JSONDecoder().decode(APODInstance.self, from: apodData)
-        print("Image of the day (APOD): ", currentAPODOfTheDay)
         
         let (imageData, _) = try await URLSession.shared.data(from: URL(string: currentAPODOfTheDay.url)!)
         currentImageOfTheDay = UIImage(data: imageData) ?? UIImage(systemName: "square.and.arrow.up.trianglebadge.exclamationmark")!
-        print("Image of the day (DATA): ", imageData)
         
         return (currentAPODOfTheDay, currentImageOfTheDay)
     }

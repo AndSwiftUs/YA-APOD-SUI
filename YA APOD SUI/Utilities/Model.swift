@@ -24,13 +24,13 @@ extension APODInstance {
     }
     
     static var loading: APODInstance {
-        .init(copyright: "copyright will be here.",
-              date: "1900-01-01",
-              explanation: "Connecting\nto NASA servers\nto load data...",
+        .init(copyright: "we..",
+              date: "Houstone",
+              explanation: "Connecting to NASA servers\nto load Image Of the Day...",
               hdurl: "nasa-logo.svg",
               media_type: "image",
               service_version: "v1",
-              title: "NASA logo",
+              title: "",
               url: "nasa-logo.svg")
     }
 }

@@ -85,7 +85,7 @@ struct SearchView: View {
         
         self.apods = try JSONDecoder().decode([APODInstance].self, from: data)
         
-        print("Done:", data)
+        print(#function, apods.count)
     }
     
     func fetchAPODSImagesInCache() async throws {
@@ -96,6 +96,7 @@ struct SearchView: View {
             
             apodsImages[fetchingAPOD] = UIImage(data: imageData) ?? UIImage(systemName: "square.and.arrow.up.trianglebadge.exclamationmark")!
         }
+        print(#function, apodsImages.count)
     }
 }
 

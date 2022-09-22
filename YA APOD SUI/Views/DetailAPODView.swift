@@ -3,6 +3,8 @@ import SwiftUI
 
 struct DetailAPODView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
     let apod: APODInstance
     let image: UIImage
     
@@ -10,7 +12,21 @@ struct DetailAPODView: View {
     @ViewBuilder
     var likeButton: some View {
         Button {
-            isFavorite = !isFavorite
+            if !isFavorite {
+                isFavorite = true
+                let newItem = Item(context: viewContext)
+                newItem.timestamp = Date()
+                newItem.title = apod.title
+                newItem.image = image.pngData()
+                
+                do {
+                    try viewContext.save()
+                    print("Image saved to CoreData: \(apod.title).")
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+            }
         } label: {
             Image(systemName: isFavorite ? "suit.heart.fill" : "suit.heart")
                 .foregroundColor(.primary)
@@ -20,12 +36,12 @@ struct DetailAPODView: View {
     var body: some View {
         
         VStack {
-                        
+            
             Text("\(apod.title)")
-
+            
             ZoomableImage(zoomImage: image)
                 .zIndex(10)
-
+            
             Text("\(apod.date), \(apod.copyright ?? "no copyright").")
             
             ScrollView {

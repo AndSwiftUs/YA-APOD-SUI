@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4963BFB828DB73A8006E211D /* ZoomableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4963BFB728DB73A8006E211D /* ZoomableImage.swift */; };
 		DC63D91D28DB0618000D2749 /* YA_APOD_SUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D91C28DB0618000D2749 /* YA_APOD_SUIApp.swift */; };
-		DC63D91F28DB0618000D2749 /* CoreDataContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D91E28DB0618000D2749 /* CoreDataContentView.swift */; };
 		DC63D92128DB0619000D2749 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC63D92028DB0619000D2749 /* Assets.xcassets */; };
 		DC63D92428DB0619000D2749 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC63D92328DB0619000D2749 /* Preview Assets.xcassets */; };
 		DC63D92628DB0619000D2749 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D92528DB0619000D2749 /* Persistence.swift */; };
@@ -20,16 +19,15 @@
 		DC63D93728DB08AC000D2749 /* APODView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D93628DB08AB000D2749 /* APODView.swift */; };
 		DC63D93928DB08BD000D2749 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D93828DB08BD000D2749 /* SettingsView.swift */; };
 		DC63D93B28DB0A73000D2749 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D93A28DB0A73000D2749 /* Model.swift */; };
-		DC63D93D28DB0AE4000D2749 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D93C28DB0AE4000D2749 /* ViewModel.swift */; };
 		DC63D93F28DB3875000D2749 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D93E28DB3875000D2749 /* AppConstants.swift */; };
 		DC63D94128DB3E9E000D2749 /* DetailAPODView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D94028DB3E9E000D2749 /* DetailAPODView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4963BFB728DB73A8006E211D /* ZoomableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableImage.swift; sourceTree = "<group>"; };
+		498C1C8928DBADCC00EF3DE4 /* YA_APOD_SUI 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "YA_APOD_SUI 2.xcdatamodel"; sourceTree = "<group>"; };
 		DC63D91928DB0618000D2749 /* YA APOD SUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "YA APOD SUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC63D91C28DB0618000D2749 /* YA_APOD_SUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YA_APOD_SUIApp.swift; sourceTree = "<group>"; };
-		DC63D91E28DB0618000D2749 /* CoreDataContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataContentView.swift; sourceTree = "<group>"; };
 		DC63D92028DB0619000D2749 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC63D92328DB0619000D2749 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DC63D92528DB0619000D2749 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -40,7 +38,6 @@
 		DC63D93628DB08AB000D2749 /* APODView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODView.swift; sourceTree = "<group>"; };
 		DC63D93828DB08BD000D2749 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DC63D93A28DB0A73000D2749 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		DC63D93C28DB0AE4000D2749 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		DC63D93E28DB3875000D2749 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		DC63D94028DB3E9E000D2749 /* DetailAPODView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAPODView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,7 +64,6 @@
 		4963BFB628DB6DE7006E211D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				DC63D93C28DB0AE4000D2749 /* ViewModel.swift */,
 				DC63D93E28DB3875000D2749 /* AppConstants.swift */,
 				DC63D93A28DB0A73000D2749 /* Model.swift */,
 				DC63D92028DB0619000D2749 /* Assets.xcassets */,
@@ -100,7 +96,6 @@
 				4963BFB628DB6DE7006E211D /* Utilities */,
 				4963BFB528DB6D82006E211D /* Views */,
 				DC63D93128DB085F000D2749 /* TabViews */,
-				DC63D91E28DB0618000D2749 /* CoreDataContentView.swift */,
 				DC63D92528DB0619000D2749 /* Persistence.swift */,
 				DC63D92728DB0619000D2749 /* YA_APOD_SUI.xcdatamodeld */,
 				DC63D92228DB0619000D2749 /* Preview Content */,
@@ -201,12 +196,10 @@
 				DC63D92628DB0619000D2749 /* Persistence.swift in Sources */,
 				DC63D93F28DB3875000D2749 /* AppConstants.swift in Sources */,
 				DC63D92928DB0619000D2749 /* YA_APOD_SUI.xcdatamodeld in Sources */,
-				DC63D93D28DB0AE4000D2749 /* ViewModel.swift in Sources */,
 				DC63D93928DB08BD000D2749 /* SettingsView.swift in Sources */,
 				DC63D93528DB089A000D2749 /* FavoriteView.swift in Sources */,
 				DC63D94128DB3E9E000D2749 /* DetailAPODView.swift in Sources */,
 				DC63D93B28DB0A73000D2749 /* Model.swift in Sources */,
-				DC63D91F28DB0618000D2749 /* CoreDataContentView.swift in Sources */,
 				4963BFB828DB73A8006E211D /* ZoomableImage.swift in Sources */,
 				DC63D93028DB06EA000D2749 /* MainView.swift in Sources */,
 				DC63D93328DB087C000D2749 /* SearchView.swift in Sources */,
@@ -416,6 +409,7 @@
 		DC63D92728DB0619000D2749 /* YA_APOD_SUI.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				498C1C8928DBADCC00EF3DE4 /* YA_APOD_SUI 2.xcdatamodel */,
 				DC63D92828DB0619000D2749 /* YA_APOD_SUI.xcdatamodel */,
 			);
 			currentVersion = DC63D92828DB0619000D2749 /* YA_APOD_SUI.xcdatamodel */;
