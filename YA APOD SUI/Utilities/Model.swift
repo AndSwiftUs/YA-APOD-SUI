@@ -30,7 +30,7 @@ extension APODInstance {
               hdurl: "nasa-logo.svg",
               media_type: "image",
               service_version: "v1",
-              title: "",
+              title: "Loading data...",
               url: "nasa-logo.svg")
     }
 }

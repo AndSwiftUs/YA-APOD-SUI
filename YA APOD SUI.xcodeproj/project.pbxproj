@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		495A406028DD93B2000BBA5A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A405F28DD93B2000BBA5A /* MainView.swift */; };
 		4963BFB828DB73A8006E211D /* ZoomableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4963BFB728DB73A8006E211D /* ZoomableImage.swift */; };
 		49D824C328DD8C38000D328B /* ImageToPhotoLibrarySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D824C228DD8C38000D328B /* ImageToPhotoLibrarySaver.swift */; };
 		DC63D91D28DB0618000D2749 /* YA_APOD_SUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D91C28DB0618000D2749 /* YA_APOD_SUIApp.swift */; };
@@ -14,7 +15,6 @@
 		DC63D92428DB0619000D2749 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC63D92328DB0619000D2749 /* Preview Assets.xcassets */; };
 		DC63D92628DB0619000D2749 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D92528DB0619000D2749 /* Persistence.swift */; };
 		DC63D92928DB0619000D2749 /* YA_APOD_SUI.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DC63D92728DB0619000D2749 /* YA_APOD_SUI.xcdatamodeld */; };
-		DC63D93028DB06EA000D2749 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D92F28DB06EA000D2749 /* MainView.swift */; };
 		DC63D93328DB087C000D2749 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D93228DB087C000D2749 /* SearchView.swift */; };
 		DC63D93528DB089A000D2749 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D93428DB089A000D2749 /* FavoriteView.swift */; };
 		DC63D93728DB08AC000D2749 /* APODView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D93628DB08AB000D2749 /* APODView.swift */; };
@@ -25,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		495A405F28DD93B2000BBA5A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		4963BFB728DB73A8006E211D /* ZoomableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableImage.swift; sourceTree = "<group>"; };
 		498C1C8928DBADCC00EF3DE4 /* YA_APOD_SUI 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "YA_APOD_SUI 2.xcdatamodel"; sourceTree = "<group>"; };
 		49D824C128DD8911000D328B /* YA-APOD-SUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "YA-APOD-SUI-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -35,7 +36,6 @@
 		DC63D92328DB0619000D2749 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DC63D92528DB0619000D2749 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		DC63D92828DB0619000D2749 /* YA_APOD_SUI.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YA_APOD_SUI.xcdatamodel; sourceTree = "<group>"; };
-		DC63D92F28DB06EA000D2749 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		DC63D93228DB087C000D2749 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		DC63D93428DB089A000D2749 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		DC63D93628DB08AB000D2749 /* APODView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODView.swift; sourceTree = "<group>"; };
@@ -59,7 +59,7 @@
 		4963BFB528DB6D82006E211D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DC63D92F28DB06EA000D2749 /* MainView.swift */,
+				495A405F28DD93B2000BBA5A /* MainView.swift */,
 				DC63D94028DB3E9E000D2749 /* DetailAPODView.swift */,
 				DC63D93128DB085F000D2749 /* TabViews */,
 			);
@@ -198,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC63D93728DB08AC000D2749 /* APODView.swift in Sources */,
+				495A406028DD93B2000BBA5A /* MainView.swift in Sources */,
 				DC63D92628DB0619000D2749 /* Persistence.swift in Sources */,
 				DC63D93F28DB3875000D2749 /* AppConstants.swift in Sources */,
 				49D824C328DD8C38000D328B /* ImageToPhotoLibrarySaver.swift in Sources */,
@@ -207,7 +208,6 @@
 				DC63D94128DB3E9E000D2749 /* DetailAPODView.swift in Sources */,
 				DC63D93B28DB0A73000D2749 /* Model.swift in Sources */,
 				4963BFB828DB73A8006E211D /* ZoomableImage.swift in Sources */,
-				DC63D93028DB06EA000D2749 /* MainView.swift in Sources */,
 				DC63D93328DB087C000D2749 /* SearchView.swift in Sources */,
 				DC63D91D28DB0618000D2749 /* YA_APOD_SUIApp.swift in Sources */,
 			);
