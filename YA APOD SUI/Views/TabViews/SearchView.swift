@@ -34,9 +34,9 @@ struct SearchView: View {
     var gridView: some View {
         LazyVGrid(columns: gridLayout) {
             ForEach(apods, id: \.self) { apod in
-                NavigationLink(destination: DetailAPODView(apod: apod, image: apodsImages[apod] ?? UIImage(systemName: "star")!)) {
+                NavigationLink(destination: DetailAPODView(apod: apod, image: apodsImages[apod] ?? UIImage(named: "nasa-logo.svg")!)) {
                     VStack {
-                        Image(uiImage: apodsImages[apod] ?? UIImage(systemName: "star")!)
+                        Image(uiImage: apodsImages[apod] ?? UIImage(named: "nasa-logo.svg")!)
                             .resizable()
                             .scaledToFill()
                             .frame(minWidth: 0, maxWidth: .infinity)
@@ -56,7 +56,9 @@ struct SearchView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
+                Divider()
                 gridView
+                Divider()
             }
             .navigationTitle("\(AppConstants.defaultCountOfRandomAPODs) Images of the day")
             .navigationBarTitleDisplayMode(.inline)
@@ -81,6 +83,8 @@ struct SearchView: View {
     
     func fetchAPODS(count: Int) async throws {
         
+        apods = [APODInstance.loading]
+        
         let (data, _) = try await URLSession.shared.data(from: URL(string: "\(AppConstants.NASA.defaultNASAUrl)?api_key=\(AppConstants.NASA.myAPIKEY)&count=\(count)")!)
         
         self.apods = try JSONDecoder().decode([APODInstance].self, from: data)
@@ -89,12 +93,15 @@ struct SearchView: View {
     }
     
     func fetchAPODSImagesInCache() async throws {
+        
+        apodsImages = [:]
+        
         for fetchingAPOD in apods {
             let url = URL(string: fetchingAPOD.url)
             
             let (imageData, _) = try await URLSession.shared.data(from: url!)
             
-            apodsImages[fetchingAPOD] = UIImage(data: imageData) ?? UIImage(systemName: "square.and.arrow.up.trianglebadge.exclamationmark")!
+            apodsImages[fetchingAPOD] = UIImage(data: imageData) ?? UIImage(named: "nasa-logo.svg")!
         }
         print(#function, apodsImages.count)
     }
