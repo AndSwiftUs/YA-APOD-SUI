@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4963BFB828DB73A8006E211D /* ZoomableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4963BFB728DB73A8006E211D /* ZoomableImage.swift */; };
+		49D824C328DD8C38000D328B /* ImageToPhotoLibrarySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D824C228DD8C38000D328B /* ImageToPhotoLibrarySaver.swift */; };
 		DC63D91D28DB0618000D2749 /* YA_APOD_SUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D91C28DB0618000D2749 /* YA_APOD_SUIApp.swift */; };
 		DC63D92128DB0619000D2749 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC63D92028DB0619000D2749 /* Assets.xcassets */; };
 		DC63D92428DB0619000D2749 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC63D92328DB0619000D2749 /* Preview Assets.xcassets */; };
@@ -26,6 +27,8 @@
 /* Begin PBXFileReference section */
 		4963BFB728DB73A8006E211D /* ZoomableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableImage.swift; sourceTree = "<group>"; };
 		498C1C8928DBADCC00EF3DE4 /* YA_APOD_SUI 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "YA_APOD_SUI 2.xcdatamodel"; sourceTree = "<group>"; };
+		49D824C128DD8911000D328B /* YA-APOD-SUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "YA-APOD-SUI-Info.plist"; sourceTree = SOURCE_ROOT; };
+		49D824C228DD8C38000D328B /* ImageToPhotoLibrarySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToPhotoLibrarySaver.swift; sourceTree = "<group>"; };
 		DC63D91928DB0618000D2749 /* YA APOD SUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "YA APOD SUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC63D91C28DB0618000D2749 /* YA_APOD_SUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YA_APOD_SUIApp.swift; sourceTree = "<group>"; };
 		DC63D92028DB0619000D2749 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,7 +59,9 @@
 		4963BFB528DB6D82006E211D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DC63D92F28DB06EA000D2749 /* MainView.swift */,
 				DC63D94028DB3E9E000D2749 /* DetailAPODView.swift */,
+				DC63D93128DB085F000D2749 /* TabViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -64,10 +69,12 @@
 		4963BFB628DB6DE7006E211D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				DC63D93E28DB3875000D2749 /* AppConstants.swift */,
 				DC63D93A28DB0A73000D2749 /* Model.swift */,
-				DC63D92028DB0619000D2749 /* Assets.xcassets */,
+				DC63D93E28DB3875000D2749 /* AppConstants.swift */,
 				4963BFB728DB73A8006E211D /* ZoomableImage.swift */,
+				49D824C228DD8C38000D328B /* ImageToPhotoLibrarySaver.swift */,
+				DC63D92028DB0619000D2749 /* Assets.xcassets */,
+				DC63D92528DB0619000D2749 /* Persistence.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -91,12 +98,10 @@
 		DC63D91B28DB0618000D2749 /* YA APOD SUI */ = {
 			isa = PBXGroup;
 			children = (
+				49D824C128DD8911000D328B /* YA-APOD-SUI-Info.plist */,
 				DC63D91C28DB0618000D2749 /* YA_APOD_SUIApp.swift */,
-				DC63D92F28DB06EA000D2749 /* MainView.swift */,
 				4963BFB628DB6DE7006E211D /* Utilities */,
 				4963BFB528DB6D82006E211D /* Views */,
-				DC63D93128DB085F000D2749 /* TabViews */,
-				DC63D92528DB0619000D2749 /* Persistence.swift */,
 				DC63D92728DB0619000D2749 /* YA_APOD_SUI.xcdatamodeld */,
 				DC63D92228DB0619000D2749 /* Preview Content */,
 			);
@@ -195,6 +200,7 @@
 				DC63D93728DB08AC000D2749 /* APODView.swift in Sources */,
 				DC63D92628DB0619000D2749 /* Persistence.swift in Sources */,
 				DC63D93F28DB3875000D2749 /* AppConstants.swift in Sources */,
+				49D824C328DD8C38000D328B /* ImageToPhotoLibrarySaver.swift in Sources */,
 				DC63D92928DB0619000D2749 /* YA_APOD_SUI.xcdatamodeld in Sources */,
 				DC63D93928DB08BD000D2749 /* SettingsView.swift in Sources */,
 				DC63D93528DB089A000D2749 /* FavoriteView.swift in Sources */,
@@ -335,11 +341,16 @@
 				DEVELOPMENT_TEAM = UH3GS9823U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "YA-APOD-SUI-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "ya APOD by NASA";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "If you want to save the liked image to you photo album.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -364,11 +375,16 @@
 				DEVELOPMENT_TEAM = UH3GS9823U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "YA-APOD-SUI-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "ya APOD by NASA";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "If you want to save the liked image to you photo album.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
