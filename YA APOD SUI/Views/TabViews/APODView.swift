@@ -33,7 +33,7 @@ struct APODView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            ScrollView {
                 Text(currAPOD.title)
                     .font(.title2)
                     .bold()
@@ -45,14 +45,10 @@ struct APODView: View {
                 Text("\(currAPOD.date), \(currAPOD.copyright ?? "no copyright").")
                     .font(.caption)
                 
-                ScrollView {
-                    Text(currAPOD.explanation)
-                        .font(.body)
-                        .padding()
-                        .multilineTextAlignment(.center)
-                }
-                
-                Spacer()
+                Text(currAPOD.explanation)
+                    .font(.body)
+                    .padding()
+                    .multilineTextAlignment(.center)
             }
             .navigationTitle("Astronomic Picture Of the Day")
             .navigationBarTitleDisplayMode(.inline)

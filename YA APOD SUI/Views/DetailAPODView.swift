@@ -35,7 +35,7 @@ struct DetailAPODView: View {
     
     var body: some View {
         
-        VStack {
+        ScrollView {
             
             Text("\(apod.title)")
             
@@ -44,13 +44,9 @@ struct DetailAPODView: View {
             
             Text("\(apod.date), \(apod.copyright ?? "no copyright").")
             
-            ScrollView {
-                Text(apod.explanation)
-                    .font(.body)
-                    .padding()
-            }
-            
-            Spacer()
+            Text(apod.explanation)
+                .font(.body)
+                .padding()            
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
