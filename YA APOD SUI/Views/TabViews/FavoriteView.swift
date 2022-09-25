@@ -3,6 +3,7 @@ import SwiftUI
 struct FavoriteView: View {
     
     @State private var isSaveOKAlertPresented = false
+    @State private var seachText = ""
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -16,26 +17,28 @@ struct FavoriteView: View {
         NavigationStack {
             List {
                 ForEach(items) { item in
-                    ZoomableImage(zoomImage: UIImage(data: item.image!)!)
-                        .overlay(ImageOverlay(title: item.title!), alignment: .bottomTrailing)
-                        .swipeActions(edge: .leading) {
-                            Button {
-                                guard let inputImage = UIImage(data: item.image!) else { return }
-                                
-                                let imageSaver = ImageToPhotoLibrarySaver()
-                                imageSaver.writeToPhotoAlbum(image: inputImage)
-                                isSaveOKAlertPresented = true
-                                
-                            } label: {
-                                Label("Save\nto gallery", systemImage: "photo")
+                    if (seachText == "") || item.title!.contains(seachText) {
+                        ZoomableImage(zoomImage: UIImage(data: item.image!)!)
+                            .overlay(ImageOverlay(title: item.title!), alignment: .bottomTrailing)
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    guard let inputImage = UIImage(data: item.image!) else { return }
+                                    
+                                    let imageSaver = ImageToPhotoLibrarySaver()
+                                    imageSaver.writeToPhotoAlbum(image: inputImage)
+                                    isSaveOKAlertPresented = true
+                                    
+                                } label: {
+                                    Label("Save\nto gallery", systemImage: "photo")
+                                }
                             }
-                        }
-                        .tint(.blue)
-                        .alert(isPresented: $isSaveOKAlertPresented) {
-                            Alert(title: Text("Image saved to gallery."),
-                                  dismissButton: .default(Text("OK"))
-                            )
-                        }
+                            .tint(.blue)
+                            .alert(isPresented: $isSaveOKAlertPresented) {
+                                Alert(title: Text("Image saved to gallery."),
+                                      dismissButton: .default(Text("OK"))
+                                )
+                            }
+                    }
                 }
                 .onDelete { indexSet in
                     for index in indexSet {
@@ -55,6 +58,7 @@ struct FavoriteView: View {
                     EditButton()
                 }
             }
+            .searchable(text: $seachText, prompt: "Nebula Star Galaxy")
         }
     }
 }
