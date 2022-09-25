@@ -3,7 +3,7 @@ import SwiftUI
 struct APODView: View {
     
     @State private var currAPOD: APODInstance = APODInstance.loading
-    @State private var currImage: UIImage = UIImage(named: "nasa-logo.svg")!
+    @State private var currImage: UIImage? = nil //UIImage(named: "nasa-logo.svg")!
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -15,7 +15,7 @@ struct APODView: View {
                 let newItem = Item(context: viewContext)
                 newItem.timestamp = Date()
                 newItem.title = currAPOD.title
-                newItem.image = currImage.pngData()
+                newItem.image = currImage!.pngData()
                 
                 do {
                     try viewContext.save()
@@ -23,7 +23,6 @@ struct APODView: View {
                 } catch {
                     print(error.localizedDescription)
                 }
-                
             }
         } label: {
             Image(systemName: isFavorite ? "suit.heart.fill" : "suit.heart")
@@ -39,9 +38,20 @@ struct APODView: View {
                     .bold()
                     .multilineTextAlignment(.center)
                 
-                ZoomableImage(zoomImage: currImage)
-                    .zIndex(10)
-                
+                if currImage == nil {
+                    Spacer()
+                    
+                    Image(uiImage: UIImage(named: "nasa-logo.svg")!)
+                        .resizable()
+                        .scaledToFit()
+                    
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                } else {
+                    ZoomableImage(zoomImage: currImage!)
+                        .zIndex(10)
+                }
                 Text("\(currAPOD.date), \(currAPOD.copyright ?? "no copyright").")
                     .font(.caption)
                 
