@@ -2,6 +2,8 @@ import SwiftUI
 
 struct FavoriteView: View {
     
+    @State private var isSaveOKAlertPresented = false
+    
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(
@@ -19,15 +21,21 @@ struct FavoriteView: View {
                         .swipeActions(edge: .leading) {
                             Button {
                                 guard let inputImage = UIImage(data: item.image!) else { return }
-
+                                
                                 let imageSaver = ImageToPhotoLibrarySaver()
                                 imageSaver.writeToPhotoAlbum(image: inputImage)
+                                isSaveOKAlertPresented = true
                                 
                             } label: {
                                 Label("Save\nto gallery", systemImage: "photo")
                             }
                         }
                         .tint(.blue)
+                        .alert(isPresented: $isSaveOKAlertPresented) {
+                            Alert(title: Text("Image saved to gallery."),
+                                  dismissButton: .default(Text("OK"))
+                            )
+                        }
                 }
                 .onDelete { indexSet in
                     for index in indexSet {
