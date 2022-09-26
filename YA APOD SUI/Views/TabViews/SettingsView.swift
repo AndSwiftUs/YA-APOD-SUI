@@ -32,8 +32,14 @@ struct SettingsView: View {
                     
                     // Stepper here for debug -> change to Text
                     // planing to get remainingRequest by inspecting the X-RateLimit-Limit and X-RateLimit-Remaining HTTP headers
-                    Stepper("Request today: \(remainingRequest)", value: $remainingRequest)
-                    
+                    Stepper(value: $remainingRequest) {
+                        HStack {
+                            Text("Request today: ")
+                            Spacer()
+                            Text("\(remainingRequest)")
+                        }
+                    }
+                        
                     if userAPIKey == "DEMO_KEY" {
                         
                         Text("\"DEMO_KEY\" is default API-key that have some restrictions:")
