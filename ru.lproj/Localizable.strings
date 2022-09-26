@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  YA APOD SUI
+  
+*/
+
+"APOD"                          = "Фото дня";
+"Search"                        = "Поиск";
+"Liked"                         = "Избранное";
+"Settings"                      = "Настройки";
+"Astronomic Picture Of the Day" = "Астрономическое фото дня";
+"Faforite images"               = "Избранное";
+"Image saved to gallery."       = "Изображение сохранено в галерею.";
+"images of the day"             = "изображений дня";
+"Save\nto gallery"              = "Сохранить\nв галерею.";
+"Loading data..."               = "Идёт загрузка...";
+"How many random images (APODs) do you want to fetch? Need fast internet connection." = "Сколько изображений загружать одновременно? Для большого количества требуется быстрое интернет-соединение.";
+"Numbers of random images:" = "Количество изображений при поиске:";
+"Enter here you own NASA API-key for fast images downloading." = "Вставьте свой NASA API-key для снятия ограничений по загрузкам.";
+"Request today: " = "Осталось запросов: ";
