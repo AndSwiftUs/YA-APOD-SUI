@@ -18,6 +18,11 @@ struct APODView: View {
                 let newItem = Item(context: viewContext)
                 newItem.timestamp = Date()
                 newItem.title = currAPOD.title
+                newItem.copyright = currAPOD.copyright
+                newItem.explanation = currAPOD.explanation
+                newItem.media_type = currAPOD.media_type
+                newItem.url = currAPOD.url
+                newItem.hdurl = currAPOD.hdurl
                 newItem.image = currImage!.pngData()
                 
                 do {

@@ -17,6 +17,11 @@ struct DetailAPODView: View {
                 let newItem = Item(context: viewContext)
                 newItem.timestamp = Date()
                 newItem.title = apod.title
+                newItem.copyright = apod.copyright
+                newItem.explanation = apod.explanation
+                newItem.media_type = apod.media_type
+                newItem.url = apod.url
+                newItem.hdurl = apod.hdurl
                 newItem.image = image.pngData()
                 
                 do {

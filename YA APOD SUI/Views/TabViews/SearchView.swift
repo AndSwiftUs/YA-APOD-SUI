@@ -47,7 +47,7 @@ struct SearchView: View {
                             .frame(height: gridLayout.count == 1 ? 200 : 100)
                             .cornerRadius(10)
                             .shadow(radius: 2)
-                        Text("\(apod.date), \(apod.title).")
+                        Text(apod.title)
                             .font(.caption)
                     }
                 }
