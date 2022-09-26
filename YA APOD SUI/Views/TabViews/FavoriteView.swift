@@ -58,7 +58,7 @@ struct FavoriteView: View {
                     EditButton()
                 }
             }
-            .searchable(text: $seachText, prompt: "Nebula Star Galaxy")
+            .searchable(text: $seachText, prompt: "Nebula Star Galaxy Hole Sun")
         }
     }
 }
@@ -81,8 +81,8 @@ struct ImageOverlay: View {
     }
 }
 
-//struct FavoriteView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FavoriteView()
-//    }
-//}
+struct FavoriteView_Previews: PreviewProvider {
+    static var previews: some View {
+        FavoriteView()
+    }
+}

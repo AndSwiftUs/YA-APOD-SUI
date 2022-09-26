@@ -2,8 +2,11 @@ import SwiftUI
 
 struct APODView: View {
     
+    @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
+    @AppStorage("remainingRequest") var remainingRequest: Int = 50
+    
     @State private var currAPOD: APODInstance = APODInstance.loading
-    @State private var currImage: UIImage? = nil //UIImage(named: "nasa-logo.svg")!
+    @State private var currImage: UIImage? = nil
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -41,7 +44,7 @@ struct APODView: View {
                 if currImage == nil {
                     Spacer()
                     
-                    Image(uiImage: UIImage(named: "nasa-logo.svg")!)
+                    Image(uiImage: UIImage(named: AppConstants.NASA.defaultNASALogo)!)
                         .resizable()
                         .scaledToFit()
                     
@@ -82,13 +85,15 @@ struct APODView: View {
         var currentAPODOfTheDay: APODInstance
         var currentImageOfTheDay: UIImage
         
-        let (apodData, _) = try await URLSession.shared.data(from: URL(string: "\(AppConstants.NASA.defaultNASAUrl)?api_key=\(AppConstants.NASA.myAPIKEY)")!)
+        let (apodData, _) = try await URLSession.shared.data(from: URL(string: "\(AppConstants.NASA.defaultNASAUrl)?api_key=\(userAPIKey)")!)
+        
+        remainingRequest -= 1
         
         currentAPODOfTheDay = try JSONDecoder().decode(APODInstance.self, from: apodData)
         
         let (imageData, _) = try await URLSession.shared.data(from: URL(string: currentAPODOfTheDay.url)!)
         currentImageOfTheDay = UIImage(data: imageData) ?? UIImage(systemName: "square.and.arrow.up.trianglebadge.exclamationmark")!
-        
+                
         return (currentAPODOfTheDay, currentImageOfTheDay)
     }
 }

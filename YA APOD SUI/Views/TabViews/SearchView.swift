@@ -2,6 +2,10 @@ import SwiftUI
 
 struct SearchView: View {
     
+    @AppStorage("countOfRandomAPODs") var countOfRandomAPODs: Int = 12
+    @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
+    @AppStorage("remainingRequest") var remainingRequest: Int = 50
+    
     @State private var apods: [APODInstance] = []
     @State private var apodsImages: [APODInstance : UIImage] = [ : ]
     
@@ -11,7 +15,7 @@ struct SearchView: View {
     var reloadButton: some View {
         Button {
             Task {
-                try await fetchAPODS(count: AppConstants.defaultCountOfRandomAPODs)
+                try await fetchAPODS(count: countOfRandomAPODs)
                 try await fetchAPODSImagesInCache()
             }
         } label: {
@@ -34,9 +38,9 @@ struct SearchView: View {
     var gridView: some View {
         LazyVGrid(columns: gridLayout) {
             ForEach(apods, id: \.self) { apod in
-                NavigationLink(destination: DetailAPODView(apod: apod, image: apodsImages[apod] ?? UIImage(named: "nasa-logo.svg")!)) {
+                NavigationLink(destination: DetailAPODView(apod: apod, image: apodsImages[apod] ?? UIImage(named: AppConstants.NASA.defaultNASALogo)!)) {
                     VStack {
-                        Image(uiImage: apodsImages[apod] ?? UIImage(named: "nasa-logo.svg")!)
+                        Image(uiImage: apodsImages[apod] ?? UIImage(named: AppConstants.NASA.defaultNASALogo)!)
                             .resizable()
                             .scaledToFill()
                             .frame(minWidth: 0, maxWidth: .infinity)
@@ -60,7 +64,7 @@ struct SearchView: View {
                 gridView
                 Divider()
             }
-            .navigationTitle("\(AppConstants.defaultCountOfRandomAPODs) Images of the day")
+            .navigationTitle("\(countOfRandomAPODs) of \(remainingRequest) Images of the day")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -73,7 +77,7 @@ struct SearchView: View {
             .onAppear {
                 Task {
                     if apods == [] {
-                        try await fetchAPODS(count: AppConstants.defaultCountOfRandomAPODs)
+                        try await fetchAPODS(count: countOfRandomAPODs)
                         try await fetchAPODSImagesInCache()
                     }
                 }
@@ -85,11 +89,13 @@ struct SearchView: View {
         
         apods = [APODInstance.loading]
         
-        let (data, _) = try await URLSession.shared.data(from: URL(string: "\(AppConstants.NASA.defaultNASAUrl)?api_key=\(AppConstants.NASA.myAPIKEY)&count=\(count)")!)
+        let (data, _) = try await URLSession.shared.data(from: URL(string: "\(AppConstants.NASA.defaultNASAUrl)?api_key=\(userAPIKey)&count=\(count)")!)
         
         self.apods = try JSONDecoder().decode([APODInstance].self, from: data)
         
         print(#function, apods.count)
+        
+        remainingRequest -= 1
     }
     
     func fetchAPODSImagesInCache() async throws {
@@ -101,9 +107,10 @@ struct SearchView: View {
             
             let (imageData, _) = try await URLSession.shared.data(from: url!)
             
-            apodsImages[fetchingAPOD] = UIImage(data: imageData) ?? UIImage(named: "nasa-logo.svg")!
+            apodsImages[fetchingAPOD] = UIImage(data: imageData) ?? UIImage(named: AppConstants.NASA.defaultNASALogo)!
         }
         print(#function, apodsImages.count)
+        
     }
 }
 
