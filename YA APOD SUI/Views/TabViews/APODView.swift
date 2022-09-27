@@ -3,7 +3,8 @@ import SwiftUI
 struct APODView: View {
     
     @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
-    @AppStorage("remainingRequest") var remainingRequest: Int = 50
+    @AppStorage("requestLimit") var requestLimit: String = "40"
+    @AppStorage("requestRemaining") var requestRemaining: String = "40"
     
     @State private var currAPOD: APODInstance = APODInstance.loading
     @State private var currImage: UIImage? = nil
@@ -90,15 +91,22 @@ struct APODView: View {
         var currentAPODOfTheDay: APODInstance
         var currentImageOfTheDay: UIImage
         
-        let (apodData, _) = try await URLSession.shared.data(from: URL(string: "\(AppConstants.NASA.defaultNASAUrl)?api_key=\(userAPIKey)")!)
+        let (apodData, response) = try await URLSession.shared.data(from: URL(string: "\(AppConstants.NASA.defaultNASAUrl)?api_key=\(userAPIKey)")!)
         
-        remainingRequest -= 1
+        if let response = response as? HTTPURLResponse {
+            if let limit = response.value(forHTTPHeaderField: "X-RateLimit-Limit") {
+                requestLimit = limit
+            }
+            if let remaining = response.value(forHTTPHeaderField: "X-RateLimit-Remaining") {
+                requestRemaining = remaining
+            }
+        }
         
         currentAPODOfTheDay = try JSONDecoder().decode(APODInstance.self, from: apodData)
         
         let (imageData, _) = try await URLSession.shared.data(from: URL(string: currentAPODOfTheDay.url)!)
         currentImageOfTheDay = UIImage(data: imageData) ?? UIImage(systemName: "square.and.arrow.up.trianglebadge.exclamationmark")!
-                
+        
         return (currentAPODOfTheDay, currentImageOfTheDay)
     }
 }

@@ -4,7 +4,8 @@ struct SearchView: View {
     
     @AppStorage("countOfRandomAPODs") var countOfRandomAPODs: Int = 12
     @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
-    @AppStorage("remainingRequest") var remainingRequest: Int = 50
+    @AppStorage("requestLimit") var requestLimit: String = "40"
+    @AppStorage("requestRemaining") var requestRemaining: String = "40"
     
     @State private var apods: [APODInstance] = []
     @State private var apodsImages: [APODInstance : UIImage] = [ : ]
@@ -64,7 +65,7 @@ struct SearchView: View {
                 gridView
                 Divider()
             }
-            .navigationTitle("\(countOfRandomAPODs) of \(remainingRequest) Images of the day")
+            .navigationTitle("\(countOfRandomAPODs) images of the day. (\(requestRemaining))")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -89,13 +90,17 @@ struct SearchView: View {
         
         apods = [APODInstance.loading]
         
-        let (data, _) = try await URLSession.shared.data(from: URL(string: "\(AppConstants.NASA.defaultNASAUrl)?api_key=\(userAPIKey)&count=\(count)")!)
+        let (data, response) = try await URLSession.shared.data(from: URL(string: "\(AppConstants.NASA.defaultNASAUrl)?api_key=\(userAPIKey)&count=\(count)")!)
         
+        if let response = response as? HTTPURLResponse {
+            if let limit = response.value(forHTTPHeaderField: "X-RateLimit-Limit") {
+                requestLimit = limit
+            }
+            if let remaining = response.value(forHTTPHeaderField: "X-RateLimit-Remaining") {
+                requestRemaining = remaining
+            }
+        }
         self.apods = try JSONDecoder().decode([APODInstance].self, from: data)
-        
-        print(#function, apods.count)
-        
-        remainingRequest -= 1
     }
     
     func fetchAPODSImagesInCache() async throws {
@@ -109,8 +114,6 @@ struct SearchView: View {
             
             apodsImages[fetchingAPOD] = UIImage(data: imageData) ?? UIImage(named: AppConstants.NASA.defaultNASALogo)!
         }
-        print(#function, apodsImages.count)
-        
     }
 }
 

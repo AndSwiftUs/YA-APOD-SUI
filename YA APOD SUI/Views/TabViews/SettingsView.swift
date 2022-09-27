@@ -4,13 +4,13 @@ struct SettingsView: View {
     
     @AppStorage("countOfRandomAPODs") var countOfRandomAPODs: Int = 12
     @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
-    @AppStorage("remainingRequest") var remainingRequest: Int = 50
+    @AppStorage("requestLimit") var requestLimit: String = "40"
+    @AppStorage("requestRemaining") var requestRemaining: String = "40"
     
-    var numbersOfAPODsArray = [2, 6, 10, 12, 16, 20, 24]
+    var numbersOfAPODsArray = [2, 6, 8, 10, 12, 16, 20, 24, 30, 40]
     
     var body: some View {
         NavigationStack {
-            
             Form {
                 Section(header: Text("How many random images (APODs) do you want to fetch? Need fast internet connection.")) {
                     
@@ -22,7 +22,6 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("Enter here you own NASA API-key for fast images downloading.")) {
-                    
                     HStack {
                         Text("API-key: ")
                         TextField("Your own NASA API-key", text: $userAPIKey)
@@ -30,16 +29,12 @@ struct SettingsView: View {
                             .foregroundColor((userAPIKey == "DEMO_KEY") ? .red : .gray)
                     }
                     
-                    // Stepper here for debug -> change to Text
-                    // planing to get remainingRequest by inspecting the X-RateLimit-Limit and X-RateLimit-Remaining HTTP headers
-                    Stepper(value: $remainingRequest) {
-                        HStack {
-                            Text("Request today: ")
-                            Spacer()
-                            Text("\(remainingRequest)")
-                        }
+                    HStack {
+                        Text("Request today: ")
+                        Spacer()
+                        Text("\(requestRemaining) of \(requestLimit).")
                     }
-                        
+                    
                     if userAPIKey == "DEMO_KEY" {
                         
                         Text("\"DEMO_KEY\" is default API-key that have some restrictions:")
