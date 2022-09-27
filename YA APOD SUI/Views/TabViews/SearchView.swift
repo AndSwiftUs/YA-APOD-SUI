@@ -2,10 +2,9 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @AppStorage("countOfRandomAPODs") var countOfRandomAPODs: Int = 12
+    @AppStorage("countOfRandomAPODs") var countOfRandomAPODs: Int = 8
     @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
-    @AppStorage("requestLimit") var requestLimit: String = "40"
-    @AppStorage("requestRemaining") var requestRemaining: String = "40"
+    @EnvironmentObject var appPrefs: AppPrefs
     
     @State private var apods: [APODInstance] = []
     @State private var apodsImages: [APODInstance : UIImage] = [ : ]
@@ -65,7 +64,7 @@ struct SearchView: View {
                 gridView
                 Divider()
             }
-            .navigationTitle("\(countOfRandomAPODs) images of the day. (\(requestRemaining))")
+            .navigationTitle("\(countOfRandomAPODs) images of the day. (\(appPrefs.requestRemaining))")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -94,10 +93,10 @@ struct SearchView: View {
         
         if let response = response as? HTTPURLResponse {
             if let limit = response.value(forHTTPHeaderField: "X-RateLimit-Limit") {
-                requestLimit = limit
+                appPrefs.requestLimit = limit
             }
             if let remaining = response.value(forHTTPHeaderField: "X-RateLimit-Remaining") {
-                requestRemaining = remaining
+                appPrefs.requestRemaining = remaining
             }
         }
         self.apods = try JSONDecoder().decode([APODInstance].self, from: data)

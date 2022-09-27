@@ -3,9 +3,8 @@ import SwiftUI
 struct APODView: View {
     
     @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
-    @AppStorage("requestLimit") var requestLimit: String = "40"
-    @AppStorage("requestRemaining") var requestRemaining: String = "40"
-    
+    @EnvironmentObject var appPrefs: AppPrefs
+
     @State private var currAPOD: APODInstance = APODInstance.loading
     @State private var currImage: UIImage? = nil
     
@@ -95,10 +94,10 @@ struct APODView: View {
         
         if let response = response as? HTTPURLResponse {
             if let limit = response.value(forHTTPHeaderField: "X-RateLimit-Limit") {
-                requestLimit = limit
+                appPrefs.requestLimit = limit
             }
             if let remaining = response.value(forHTTPHeaderField: "X-RateLimit-Remaining") {
-                requestRemaining = remaining
+                appPrefs.requestRemaining = remaining
             }
         }
         

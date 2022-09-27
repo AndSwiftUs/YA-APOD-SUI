@@ -4,6 +4,8 @@ struct MainView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
+    var appPrefs = AppPrefs()
+    
     var body: some View {
         TabView {
             APODView()
@@ -11,12 +13,14 @@ struct MainView: View {
                     Image(systemName: "globe")
                     Text("APOD")
                 }
+                .environmentObject(appPrefs)
             
             SearchView()
                 .tabItem {
                     Image(systemName: "photo.on.rectangle.angled")
                     Text("Search")
                 }
+                .environmentObject(appPrefs)
             
             FavoriteView()
                 .tabItem {
@@ -29,6 +33,7 @@ struct MainView: View {
                     Image(systemName: "person.circle")
                     Text("Settings")
                 }
+                .environmentObject(appPrefs)
         }
     }
 }

@@ -1,5 +1,10 @@
 import Foundation
 
+class AppPrefs: ObservableObject {
+    var requestLimit: String = "40"
+    var requestRemaining: String = "40"
+}
+
 struct AppConstants {
         
     struct NASA {
