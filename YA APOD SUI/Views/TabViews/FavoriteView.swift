@@ -53,6 +53,7 @@ struct FavoriteView: View {
             }
             .listStyle(.inset)
             .navigationTitle("Faforite images")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
