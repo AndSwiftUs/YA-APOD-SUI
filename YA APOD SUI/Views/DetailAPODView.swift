@@ -3,6 +3,7 @@ import SwiftUI
 
 struct DetailAPODView: View {
     
+    @AppStorage("newLikedImages") var newLikedImages: Int = 0
     @Environment(\.managedObjectContext) private var viewContext
     
     let apod: APODInstance
@@ -27,6 +28,7 @@ struct DetailAPODView: View {
                 do {
                     try viewContext.save()
                     print("Image saved to CoreData: \(apod.title).")
+                    newLikedImages += 1
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -54,6 +56,9 @@ struct DetailAPODView: View {
                 .padding()            
         }
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbarBackground(AppConstants.NASA.blueColor, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)        
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 likeButton

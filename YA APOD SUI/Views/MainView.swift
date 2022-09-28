@@ -3,6 +3,8 @@ import SwiftUI
 struct MainView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
+    @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
+    @AppStorage("newLikedImages") var newLikedImages: Int = 0
     
     var appPrefs = AppPrefs()
     
@@ -10,31 +12,30 @@ struct MainView: View {
         TabView {
             APODView()
                 .tabItem {
-                    Image(systemName: "globe")
-                    Text("APOD")
+                    Label("APOD", systemImage: "globe")
                 }
                 .environmentObject(appPrefs)
             
             SearchView()
                 .tabItem {
-                    Image(systemName: "photo.on.rectangle.angled")
-                    Text("Search")
+                    Label("Search", systemImage: "photo.on.rectangle.angled")
                 }
                 .environmentObject(appPrefs)
             
             FavoriteView()
+                .badge(newLikedImages != 0 ? "\(newLikedImages)" : nil)
                 .tabItem {
-                    Image(systemName: "suit.heart")
-                    Text("Liked")
+                    Label("Liked", systemImage: "suit.heart")
                 }
             
             SettingsView()
+                .badge(userAPIKey == "DEMO_KEY" ? "!" : nil)
                 .tabItem {
-                    Image(systemName: "person.circle")
-                    Text("Settings")
+                    Label("Settings", systemImage: "gear")
                 }
                 .environmentObject(appPrefs)
         }
+        .accentColor(AppConstants.NASA.blueColor)
     }
 }
 

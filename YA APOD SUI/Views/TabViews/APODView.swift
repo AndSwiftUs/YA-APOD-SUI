@@ -3,6 +3,7 @@ import SwiftUI
 struct APODView: View {
     
     @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
+    @AppStorage("newLikedImages") var newLikedImages: Int = 0
     @EnvironmentObject var appPrefs: AppPrefs
 
     @State private var currAPOD: APODInstance = APODInstance.loading
@@ -28,6 +29,7 @@ struct APODView: View {
                 do {
                     try viewContext.save()
                     print("Image saved to CoreData: \(currAPOD.title).")
+                    newLikedImages += 1
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -45,6 +47,8 @@ struct APODView: View {
                     .font(.title2)
                     .bold()
                     .multilineTextAlignment(.center)
+                    .textSelection(.enabled)
+                    .padding(.top)
                 
                 if currImage == nil {
                     Spacer()
@@ -67,15 +71,20 @@ struct APODView: View {
                     .font(.body)
                     .padding()
                     .multilineTextAlignment(.center)
+                    .textSelection(.enabled)
             }
             .navigationTitle("Astronomic Picture Of the Day")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbarBackground(AppConstants.NASA.blueColor, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     likeButton
                 }
             }
             .onAppear {
+                UITabBar.appearance().barTintColor = .red
                 Task {
                     if currAPOD.date == "Houstone" {
                         (currAPOD, currImage) = try await fetchImageOfTheDay()
@@ -113,5 +122,6 @@ struct APODView: View {
 struct APODView_Previews: PreviewProvider {
     static var previews: some View {
         APODView()
+            .environmentObject(AppPrefs())
     }
 }

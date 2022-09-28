@@ -2,6 +2,8 @@ import SwiftUI
 
 struct FavoriteView: View {
     
+    @AppStorage("newLikedImages") var newLikedImages: Int = 0
+
     @State private var isSaveOKAlertPresented = false
     @State private var seachText = ""
     
@@ -54,12 +56,19 @@ struct FavoriteView: View {
             .listStyle(.inset)
             .navigationTitle("Faforite images")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbarBackground(AppConstants.NASA.greenColor, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
             }
             .searchable(text: $seachText, prompt: "Nebula Star Galaxy Hole Sun")
+            .onAppear {
+                newLikedImages = 0
+            }
+            .accentColor(.red)
         }
     }
 }

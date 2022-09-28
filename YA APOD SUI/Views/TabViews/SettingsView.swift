@@ -11,25 +11,25 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("How many random images (APODs) do you want to fetch? Need fast internet connection.")) {
+                Section(header: Text("\"Search\" section:")) {
                     
-                    Picker("Numbers of random images in \"Search\" section:", selection: $countOfRandomAPODs) {
+                    Picker("Numbers of random images: ", selection: $countOfRandomAPODs) {
                         ForEach(numbersOfAPODsArray, id: \.self) { number in
                             Text(number, format: .number)
                         }
                     }
                 }
                 
-                Section(header: Text("Enter here you own NASA API-key for fast images downloading.")) {
+                Section(header: Text("NASA API-key for fast images downloading.")) {
                     HStack {
-                        Text("NASA API-key: ")
+                        Text("Your API-key is: ")
                         TextField("Your own NASA API-key", text: $userAPIKey)
                             .font(.footnote)
                             .foregroundColor((userAPIKey == "DEMO_KEY") ? .red : .gray)
                     }
                     
                     HStack {
-                        Text("Request today: ")
+                        Text("Requests today: ")
                         Spacer()
                         Text("\(appPrefs.requestRemaining) of \(appPrefs.requestLimit).")
                     }
@@ -74,6 +74,13 @@ For each API key, these limits are applied across all api.nasa.gov API requests.
             Spacer()
                 .navigationTitle("Settings")
                 .navigationBarTitleDisplayMode(.inline)
+                .toolbarColorScheme(.dark, for: .navigationBar)
+                .toolbarBackground(
+                    Color.init(uiColor: (userAPIKey == "DEMO_KEY")
+                               ? AppConstants.NASA.redUIColor : .gray),
+                    for: .navigationBar
+                )
+                .toolbarBackground(.visible, for: .navigationBar)
         }
     }
 }
@@ -81,5 +88,6 @@ For each API key, these limits are applied across all api.nasa.gov API requests.
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(AppPrefs())
     }
 }

@@ -66,6 +66,9 @@ struct SearchView: View {
             }
             .navigationTitle("\(countOfRandomAPODs) images of the day. (\(appPrefs.requestRemaining))")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbarBackground(AppConstants.NASA.blueColor, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     reloadButton
@@ -119,5 +122,6 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         SearchView()
+            .environmentObject(AppPrefs())
     }
 }
