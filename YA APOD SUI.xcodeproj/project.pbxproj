@@ -27,7 +27,7 @@
 /* Begin PBXFileReference section */
 		495A405F28DD93B2000BBA5A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		4963BFB728DB73A8006E211D /* ZoomableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableImage.swift; sourceTree = "<group>"; };
-		498C1C8928DBADCC00EF3DE4 /* YA_APOD_SUI 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "YA_APOD_SUI 2.xcdatamodel"; sourceTree = "<group>"; };
+		498C1C8928DBADCC00EF3DE4 /*  */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodeld; name = ""; sourceTree = "<group>"; };
 		49D824C128DD8911000D328B /* YA-APOD-SUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "YA-APOD-SUI-Info.plist"; sourceTree = SOURCE_ROOT; };
 		49D824C228DD8C38000D328B /* ImageToPhotoLibrarySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToPhotoLibrarySaver.swift; sourceTree = "<group>"; };
 		DC63D91928DB0618000D2749 /* YA APOD SUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "YA APOD SUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,7 +342,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "YA-APOD-SUI-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "ya APOD by NASA";
+				INFOPLIST_KEY_CFBundleDisplayName = "ya APOD";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "If you want to save the liked image to you photo album.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -376,7 +376,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "YA-APOD-SUI-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "ya APOD by NASA";
+				INFOPLIST_KEY_CFBundleDisplayName = "ya APOD";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "If you want to save the liked image to you photo album.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -425,7 +425,7 @@
 		DC63D92728DB0619000D2749 /* YA_APOD_SUI.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				498C1C8928DBADCC00EF3DE4 /* YA_APOD_SUI 2.xcdatamodel */,
+				498C1C8928DBADCC00EF3DE4 /*  */,
 				DC63D92828DB0619000D2749 /* YA_APOD_SUI.xcdatamodel */,
 			);
 			currentVersion = DC63D92828DB0619000D2749 /* YA_APOD_SUI.xcdatamodel */;

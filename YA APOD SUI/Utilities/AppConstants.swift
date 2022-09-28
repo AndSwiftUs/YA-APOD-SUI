@@ -3,7 +3,7 @@ import SwiftUI
 
 class AppPrefs: ObservableObject {
     var requestLimit: String = "40"
-    var requestRemaining: String = "40"
+    var requestRemaining: String = "0"
 }
 
 struct AppConstants {
