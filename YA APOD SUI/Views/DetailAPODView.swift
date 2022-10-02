@@ -4,6 +4,7 @@ import SwiftUI
 struct DetailAPODView: View {
     
     @AppStorage("newLikedImages") var newLikedImages: Int = 0
+    @AppStorage("isHapticFeedback") var isHapticFeedback: Bool = true
     @Environment(\.managedObjectContext) private var viewContext
     
     let apod: APODInstance
@@ -29,6 +30,7 @@ struct DetailAPODView: View {
                     try viewContext.save()
                     print("Image saved to CoreData: \(apod.title).")
                     newLikedImages += 1
+                    if isHapticFeedback { UIImpactFeedbackGenerator(style: .medium).impactOccurred() }
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -42,23 +44,28 @@ struct DetailAPODView: View {
     
     var body: some View {
         
+        Text("\(apod.title)")
+            .font(.title2)
+            .bold()
+            .multilineTextAlignment(.center)
+            .textSelection(.enabled)
+            .padding(.top)
+        
+        ZoomableImage(zoomImage: image)
+            .zIndex(10)
+        
+        Text("\(apod.date), \(apod.copyright ?? "no copyright").")
+        
         ScrollView {
-            
-            Text("\(apod.title)")
-            
-            ZoomableImage(zoomImage: image)
-                .zIndex(10)
-            
-            Text("\(apod.date), \(apod.copyright ?? "no copyright").")
             
             Text(apod.explanation)
                 .font(.body)
-                .padding()            
+                .padding()
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbarBackground(AppConstants.NASA.blueColor, for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)        
+        .toolbarBackground(.visible, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 likeButton

@@ -4,12 +4,15 @@ struct APODView: View {
     
     @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
     @AppStorage("newLikedImages") var newLikedImages: Int = 0
+    @AppStorage("isHapticFeedback") var isHapticFeedback: Bool = true
     @EnvironmentObject var appPrefs: AppPrefs
-
+    
     @State private var currAPOD: APODInstance = APODInstance.loading
     @State private var currImage: UIImage? = nil
     
     @Environment(\.managedObjectContext) private var viewContext
+    
+    @State private var imageScale : CGFloat = 1
     
     @State private var isFavorite: Bool = false
     @ViewBuilder var likeButton: some View {
@@ -30,6 +33,7 @@ struct APODView: View {
                     try viewContext.save()
                     print("Image saved to CoreData: \(currAPOD.title).")
                     newLikedImages += 1
+                    if isHapticFeedback { UIImpactFeedbackGenerator(style: .medium).impactOccurred() }
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -42,31 +46,50 @@ struct APODView: View {
     
     var body: some View {
         NavigationStack {
+            Text(currAPOD.title)
+                .font(.title2)
+                .bold()
+                .multilineTextAlignment(.center)
+                .textSelection(.enabled)
+                .padding(.top)
+            
+            if currImage == nil {
+                Spacer()
+                
+                Image(uiImage: UIImage(named: AppConstants.NASA.defaultNASALogo)!)
+                    .resizable()
+                    .scaledToFit()
+                
+                Spacer()
+                ProgressView()
+                Spacer()
+            } else {
+                //                    ZoomableImage(zoomImage: currImage!)
+                //                        .zIndex(10)
+                Image(uiImage: currImage!)
+                    .resizable()
+                    .scaledToFit()
+                    .scaleEffect((imageScale > 1) ? imageScale : 1)
+                    .gesture(
+                        MagnificationGesture()
+                            .onChanged( { (value) in
+                                imageScale = value
+                            })
+                            .onEnded({ (_) in
+                                withAnimation((.spring())) {
+                                    imageScale = 1
+                                }
+                            })
+                            .simultaneously(with: TapGesture(count: 2).onEnded({ (_) in
+                                withAnimation((.spring())) {
+                                    imageScale = (imageScale > 1) ? 1 : 4
+                                }
+                            }))
+                    )
+            }
+            Text("\(currAPOD.date), \(currAPOD.copyright ?? "no copyright").")
+                .font(.caption)
             ScrollView {
-                Text(currAPOD.title)
-                    .font(.title2)
-                    .bold()
-                    .multilineTextAlignment(.center)
-                    .textSelection(.enabled)
-                    .padding(.top)
-                
-                if currImage == nil {
-                    Spacer()
-                    
-                    Image(uiImage: UIImage(named: AppConstants.NASA.defaultNASALogo)!)
-                        .resizable()
-                        .scaledToFit()
-                    
-                    Spacer()
-                    ProgressView()
-                    Spacer()
-                } else {
-                    ZoomableImage(zoomImage: currImage!)
-                        .zIndex(10)
-                }
-                Text("\(currAPOD.date), \(currAPOD.copyright ?? "no copyright").")
-                    .font(.caption)
-                
                 Text(currAPOD.explanation)
                     .font(.body)
                     .padding()
@@ -111,9 +134,12 @@ struct APODView: View {
         }
         
         currentAPODOfTheDay = try JSONDecoder().decode(APODInstance.self, from: apodData)
+        if isHapticFeedback { UIImpactFeedbackGenerator(style: .light).impactOccurred() }
         
         let (imageData, _) = try await URLSession.shared.data(from: URL(string: currentAPODOfTheDay.url)!)
         currentImageOfTheDay = UIImage(data: imageData) ?? UIImage(systemName: "square.and.arrow.up.trianglebadge.exclamationmark")!
+        
+        if isHapticFeedback { UIImpactFeedbackGenerator(style: .heavy).impactOccurred() }
         
         return (currentAPODOfTheDay, currentImageOfTheDay)
     }

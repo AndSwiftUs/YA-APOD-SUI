@@ -4,6 +4,7 @@ struct SearchView: View {
     
     @AppStorage("countOfRandomAPODs") var countOfRandomAPODs: Int = 8
     @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
+    @AppStorage("isHapticFeedback") var isHapticFeedback: Bool = true
     @EnvironmentObject var appPrefs: AppPrefs
     
     @State private var apods: [APODInstance] = []
@@ -28,6 +29,7 @@ struct SearchView: View {
     var gridButton: some View {
         Button {
             self.gridLayout = Array(repeating: .init(.flexible()), count: gridLayout.count % 3 + 1)
+            if isHapticFeedback { UIImpactFeedbackGenerator(style: .medium).impactOccurred() }
         } label: {
             Image(systemName: "square.grid.2x2")
                 .foregroundColor(.primary)
@@ -103,6 +105,8 @@ struct SearchView: View {
             }
         }
         self.apods = try JSONDecoder().decode([APODInstance].self, from: data)
+        
+        if isHapticFeedback { UIImpactFeedbackGenerator(style: .light).impactOccurred() }
     }
     
     func fetchAPODSImagesInCache() async throws {
@@ -115,6 +119,7 @@ struct SearchView: View {
             let (imageData, _) = try await URLSession.shared.data(from: url!)
             
             apodsImages[fetchingAPOD] = UIImage(data: imageData) ?? UIImage(named: AppConstants.NASA.defaultNASALogo)!
+            if isHapticFeedback { UIImpactFeedbackGenerator(style: .medium).impactOccurred() }
         }
     }
 }

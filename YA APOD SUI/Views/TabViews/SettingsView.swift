@@ -4,9 +4,10 @@ struct SettingsView: View {
     
     @AppStorage("countOfRandomAPODs") var countOfRandomAPODs: Int = 8
     @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
+    @AppStorage("isHapticFeedback") var isHapticFeedback: Bool = true
     @EnvironmentObject var appPrefs: AppPrefs
 
-    var numbersOfAPODsArray = [2, 8, 12, 20, 30, 40]
+    var numbersOfAPODsArray = [2, 8, 10, 12, 20, 30, 40]
     
     var body: some View {
         NavigationStack {
@@ -19,6 +20,8 @@ struct SettingsView: View {
                         }
                     }
                 }
+                
+                Toggle("HapticFeedback", isOn: $isHapticFeedback)
                 
                 Section(header: Text("NASA API-key for fast images downloading.")) {
                     HStack {
