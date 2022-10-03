@@ -69,7 +69,7 @@ struct SearchView: View {
                 gridView
                 Divider()
             }
-            .navigationTitle("\(countOfRandomAPODs) images of the day")
+            .navigationTitle("\(countOfRandomAPODs) random images of the day")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbarBackground(AppConstants.NASA.blueColor, for: .navigationBar)
