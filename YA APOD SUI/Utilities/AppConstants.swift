@@ -21,7 +21,9 @@ struct AppConstants {
         
         static let countOfApiKeySymbols     = 40
 
-        static let defaultNASALogo          = "nasa-logo.svg"
+        static let defaultNASALogo          = "nasa-logo"
+        static let defaultNASALoading       = "loading"
+        static let defaultNASAFailure       = "failure"
 
         static let defaultAPIKey            = "DEMO_KEY"
         static let defaultNASAUrl           = "https://api.nasa.gov/planetary/apod"

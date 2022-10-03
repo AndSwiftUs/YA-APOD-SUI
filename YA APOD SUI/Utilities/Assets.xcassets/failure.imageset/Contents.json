@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "nasa-logo - original.png",
+      "filename" : "nasa-logo-error-connection.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "nasa-logo - original@2x.png",
+      "filename" : "nasa-logo-error-connection@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "nasa-logo - original@3x.png",
+      "filename" : "nasa-logo-error-connection@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

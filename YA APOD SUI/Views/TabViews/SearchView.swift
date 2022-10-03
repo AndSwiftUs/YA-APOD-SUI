@@ -3,6 +3,7 @@ import SwiftUI
 struct SearchView: View {
     
     @AppStorage("countOfRandomAPODs") var countOfRandomAPODs: Int = 8
+    @AppStorage("searchGridLayoutState") var searchGridLayoutState: Int = 1
     @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
     @AppStorage("isHapticFeedback") var isHapticFeedback: Bool = true
     @EnvironmentObject var appPrefs: AppPrefs
@@ -28,7 +29,9 @@ struct SearchView: View {
     @ViewBuilder
     var gridButton: some View {
         Button {
-            self.gridLayout = Array(repeating: .init(.flexible()), count: gridLayout.count % 3 + 1)
+            if searchGridLayoutState < 3 {
+                searchGridLayoutState += 1 } else { searchGridLayoutState = 1 }
+            self.gridLayout = Array(repeating: .init(.flexible()), count: searchGridLayoutState)
             if isHapticFeedback { UIImpactFeedbackGenerator(style: .medium).impactOccurred() }
         } label: {
             Image(systemName: "square.grid.2x2")
@@ -40,13 +43,13 @@ struct SearchView: View {
     var gridView: some View {
         LazyVGrid(columns: gridLayout) {
             ForEach(apods, id: \.self) { apod in
-                NavigationLink(destination: DetailAPODView(apod: apod, image: apodsImages[apod] ?? UIImage(named: AppConstants.NASA.defaultNASALogo)!)) {
+                NavigationLink(destination: DetailAPODView(apod: apod, image: apodsImages[apod] ?? UIImage(named: AppConstants.NASA.defaultNASALoading)!)) {
                     VStack {
-                        Image(uiImage: apodsImages[apod] ?? UIImage(named: AppConstants.NASA.defaultNASALogo)!)
+                        Image(uiImage: apodsImages[apod] ?? UIImage(named: AppConstants.NASA.defaultNASALoading)!)
                             .resizable()
                             .scaledToFill()
                             .frame(minWidth: 0, maxWidth: .infinity)
-                            .frame(height: gridLayout.count == 1 ? 200 : 100)
+                            .frame(height: searchGridLayoutState == 1 ? 200 : 100)
                             .cornerRadius(10)
                             .shadow(radius: 2)
                         Text(apod.title)
@@ -56,7 +59,7 @@ struct SearchView: View {
             }
         }
         .padding(10)
-        .animation(.easeInOut, value: gridLayout.count)
+        .animation(.easeInOut, value: searchGridLayoutState)
     }
     
     var body: some View {
@@ -66,7 +69,7 @@ struct SearchView: View {
                 gridView
                 Divider()
             }
-            .navigationTitle("\(countOfRandomAPODs) images of the day.")
+            .navigationTitle("\(countOfRandomAPODs) images of the day")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbarBackground(AppConstants.NASA.blueColor, for: .navigationBar)
@@ -81,6 +84,7 @@ struct SearchView: View {
             }
             .onAppear {
                 Task {
+                    self.gridLayout = Array(repeating: .init(.flexible()), count: searchGridLayoutState)
                     if apods == [] {
                         try await fetchAPODS(count: countOfRandomAPODs)
                         try await fetchAPODSImagesInCache()
@@ -118,7 +122,7 @@ struct SearchView: View {
             
             let (imageData, _) = try await URLSession.shared.data(from: url!)
             
-            apodsImages[fetchingAPOD] = UIImage(data: imageData) ?? UIImage(named: AppConstants.NASA.defaultNASALogo)!
+            apodsImages[fetchingAPOD] = UIImage(data: imageData) ?? UIImage(named: AppConstants.NASA.defaultNASAFailure)!
             if isHapticFeedback { UIImpactFeedbackGenerator(style: .medium).impactOccurred() }
         }
     }

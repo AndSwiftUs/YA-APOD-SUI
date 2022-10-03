@@ -3,27 +3,38 @@ import SwiftUI
 struct SettingsView: View {
     
     @AppStorage("countOfRandomAPODs") var countOfRandomAPODs: Int = 8
+    @AppStorage("searchGridLayoutState") var searchGridLayoutState: Int = 1
     @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
     @AppStorage("isHapticFeedback") var isHapticFeedback: Bool = true
     @EnvironmentObject var appPrefs: AppPrefs
-
+    
     var numbersOfAPODsArray = [2, 8, 10, 12, 20, 30, 40]
+    var numersOfSearchLayoutColumns = [1,2,3]
     
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("\"Search\" section:")) {
-                    
-                    Picker("Numbers of random images: ", selection: $countOfRandomAPODs) {
-                        ForEach(numbersOfAPODsArray, id: \.self) { number in
-                            Text(number, format: .number)
+                Section(header: Text("Interface")) {
+                    Group {
+                        Picker("Random images: ", selection: $countOfRandomAPODs) {
+                            ForEach(numbersOfAPODsArray, id: \.self) { number in
+                                Text(number, format: .number)
+                            }
                         }
+                        
+                        Stepper(value: $searchGridLayoutState, in: 1...3) {
+                            HStack {
+                                Text("Сolumns in search:")
+                                Spacer()
+                                Text("\(searchGridLayoutState)")
+                            }
+                        }
+                        
+                        Toggle("HapticFeedback", isOn: $isHapticFeedback)
                     }
                 }
                 
-                Toggle("HapticFeedback", isOn: $isHapticFeedback)
-                
-                Section(header: Text("NASA API-key for fast images downloading.")) {
+                Section(header: Text("NASA API-key")) {
                     HStack {
                         Text("Your API-key is: ")
                         TextField("Your own NASA API-key", text: $userAPIKey)
