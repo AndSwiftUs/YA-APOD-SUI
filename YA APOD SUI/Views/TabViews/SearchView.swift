@@ -122,7 +122,7 @@ struct SearchView: View {
             
             let (imageData, _) = try await URLSession.shared.data(from: url!)
             
-            apodsImages[fetchingAPOD] = UIImage(data: imageData) ?? UIImage(named: AppConstants.NASA.defaultNASAFailure)!
+            apodsImages[fetchingAPOD] = UIImage(data: imageData) ?? UIImage(named: "youtube")!
             if isHapticFeedback { UIImpactFeedbackGenerator(style: .medium).impactOccurred() }
         }
     }

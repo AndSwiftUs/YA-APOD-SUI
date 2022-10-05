@@ -51,8 +51,12 @@ struct DetailAPODView: View {
             .textSelection(.enabled)
             .padding(.top)
         
-        ZoomableImage(zoomImage: image)
-            .zIndex(10)
+        if apod.media_type == "image" {
+            ZoomableImage(zoomImage: image)
+                .zIndex(10)
+        } else {
+            YoutubeVideoView(youtubeVideoID: apod.url)
+        }
         
         Text("\(apod.date), \(apod.copyright ?? "no copyright").")
         
@@ -67,8 +71,10 @@ struct DetailAPODView: View {
         .toolbarBackground(AppConstants.NASA.blueColor, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                likeButton
+            if apod.media_type == "image" {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    likeButton
+                }
             }
         }
     }

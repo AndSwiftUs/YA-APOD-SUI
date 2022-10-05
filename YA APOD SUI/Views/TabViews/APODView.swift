@@ -64,31 +64,36 @@ struct APODView: View {
                 ProgressView()
                 Spacer()
             } else {
-                //                    ZoomableImage(zoomImage: currImage!)
-                //                        .zIndex(10)
-                Image(uiImage: currImage!)
-                    .resizable()
-                    .scaledToFit()
-                    .scaleEffect((imageScale > 1) ? imageScale : 1)
-                    .gesture(
-                        MagnificationGesture()
-                            .onChanged( { (value) in
-                                imageScale = value
-                            })
-                            .onEnded({ (_) in
-                                withAnimation((.spring())) {
-                                    imageScale = 1
-                                }
-                            })
-                            .simultaneously(with: TapGesture(count: 2).onEnded({ (_) in
-                                withAnimation((.spring())) {
-                                    imageScale = (imageScale > 1) ? 1 : 4
-                                }
-                            }))
-                    )
+                if currAPOD.media_type == "image" {
+                    //                    ZoomableImage(zoomImage: currImage!)
+                    //                        .zIndex(10)
+                    Image(uiImage: currImage!)
+                        .resizable()
+                        .scaledToFit()
+                        .scaleEffect((imageScale > 1) ? imageScale : 1)
+                        .gesture(
+                            MagnificationGesture()
+                                .onChanged( { (value) in
+                                    imageScale = value
+                                })
+                                .onEnded({ (_) in
+                                    withAnimation((.spring())) {
+                                        imageScale = 1
+                                    }
+                                })
+                                .simultaneously(with: TapGesture(count: 2).onEnded({ (_) in
+                                    withAnimation((.spring())) {
+                                        imageScale = (imageScale > 1) ? 1 : 4
+                                    }
+                                }))
+                        )
+                } else {
+                    YoutubeVideoView(youtubeVideoID: currAPOD.url)
+                }
             }
             Text("\(currAPOD.date), \(currAPOD.copyright ?? "no copyright").")
                 .font(.caption)
+            Text(currAPOD.media_type) + Text(currAPOD.url)
             ScrollView {
                 Text(currAPOD.explanation)
                     .font(.body)
@@ -102,8 +107,10 @@ struct APODView: View {
             .toolbarBackground(AppConstants.NASA.blueColor, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    likeButton
+                if currAPOD.media_type == "image" {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        likeButton
+                    }
                 }
             }
             .onAppear {

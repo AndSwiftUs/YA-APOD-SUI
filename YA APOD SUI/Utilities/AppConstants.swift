@@ -2,8 +2,8 @@ import Foundation
 import SwiftUI
 
 class AppPrefs: ObservableObject {
-    var requestLimit: String = "40"
-    var requestRemaining: String = "0"
+    var requestLimit: String = "?"
+    var requestRemaining: String = "?"
 }
 
 struct AppConstants {

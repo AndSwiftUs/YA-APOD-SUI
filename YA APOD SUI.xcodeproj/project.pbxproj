@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		495A406028DD93B2000BBA5A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A405F28DD93B2000BBA5A /* MainView.swift */; };
 		4963BFB828DB73A8006E211D /* ZoomableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4963BFB728DB73A8006E211D /* ZoomableImage.swift */; };
+		499A79F928EDC0CD00E5B2D6 /* YoutubeVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499A79F828EDC0CD00E5B2D6 /* YoutubeVideoView.swift */; };
 		49D824C328DD8C38000D328B /* ImageToPhotoLibrarySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D824C228DD8C38000D328B /* ImageToPhotoLibrarySaver.swift */; };
 		49E59DC928E9ED3C00107977 /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E59DC828E9ED3C00107977 /* HapticFeedback.swift */; };
 		DC63D91D28DB0618000D2749 /* YA_APOD_SUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC63D91C28DB0618000D2749 /* YA_APOD_SUIApp.swift */; };
@@ -29,6 +30,7 @@
 		495A405F28DD93B2000BBA5A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		4963BFB728DB73A8006E211D /* ZoomableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableImage.swift; sourceTree = "<group>"; };
 		498C1C8928DBADCC00EF3DE4 /*  */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodeld; name = ""; sourceTree = "<group>"; };
+		499A79F828EDC0CD00E5B2D6 /* YoutubeVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeVideoView.swift; sourceTree = "<group>"; };
 		49D824C128DD8911000D328B /* YA-APOD-SUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "YA-APOD-SUI-Info.plist"; sourceTree = SOURCE_ROOT; };
 		49D824C228DD8C38000D328B /* ImageToPhotoLibrarySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToPhotoLibrarySaver.swift; sourceTree = "<group>"; };
 		49E59DC828E9ED3C00107977 /* HapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				DC63D93E28DB3875000D2749 /* AppConstants.swift */,
 				4963BFB728DB73A8006E211D /* ZoomableImage.swift */,
 				49D824C228DD8C38000D328B /* ImageToPhotoLibrarySaver.swift */,
+				499A79F828EDC0CD00E5B2D6 /* YoutubeVideoView.swift */,
 				DC63D92028DB0619000D2749 /* Assets.xcassets */,
 				DC63D92528DB0619000D2749 /* Persistence.swift */,
 				49E59DC828E9ED3C00107977 /* HapticFeedback.swift */,
@@ -213,6 +216,7 @@
 				DC63D93B28DB0A73000D2749 /* Model.swift in Sources */,
 				4963BFB828DB73A8006E211D /* ZoomableImage.swift in Sources */,
 				DC63D93328DB087C000D2749 /* SearchView.swift in Sources */,
+				499A79F928EDC0CD00E5B2D6 /* YoutubeVideoView.swift in Sources */,
 				DC63D91D28DB0618000D2749 /* YA_APOD_SUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
