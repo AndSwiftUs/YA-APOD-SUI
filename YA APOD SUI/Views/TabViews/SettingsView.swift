@@ -7,6 +7,7 @@ struct SettingsView: View {
     @AppStorage("userAPIKey") var userAPIKey: String = "DEMO_KEY"
     @AppStorage("isHapticFeedback") var isHapticFeedback: Bool = true
     @EnvironmentObject var appPrefs: AppPrefs
+    @State private var newApiKey: String = ""
     
     var numbersOfAPODsArray = [2, 8, 10, 12, 20, 30, 40]
     var numersOfSearchLayoutColumns = [1,2,3]
@@ -35,11 +36,26 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("NASA API-key")) {
-                    HStack {
-                        Text("Your API-key is: ")
-                        TextField("Your own NASA API-key", text: $userAPIKey)
-                            .font(.footnote)
-                            .foregroundColor((userAPIKey == "DEMO_KEY") ? .red : .gray)
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Your API-key is:")
+                                .font(.callout)
+                                .bold()
+                            Text(" \(userAPIKey)")
+                                .font(.footnote)
+                                .textSelection(.enabled)
+                        }
+                        if userAPIKey == "DEMO_KEY" {
+                            TextField("Your own NASA API-key", text: $newApiKey, prompt: Text("Required"))
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .font(.footnote)
+                                .foregroundColor((userAPIKey == "DEMO_KEY") ? .red : .gray)
+                                .onSubmit {
+                                    if newApiKey.count == AppConstants.NASA.countOfApiKeySymbols {
+                                        userAPIKey = newApiKey
+                                    }
+                                }
+                        }
                     }
                     
                     HStack {
@@ -77,6 +93,16 @@ Daily Limit: 2,000 requests per IP address per day
 For each API key, these limits are applied across all api.nasa.gov API requests. Exceeding these limits will lead to your API key being temporarily blocked from making further requests. The block will automatically be lifted by waiting an hour. If you need higher rate limits, contact us.
 
 """).font(.footnote).foregroundColor(.gray)
+                }
+                
+                if userAPIKey != "DEMO_KEY" {
+                    Button {
+                        userAPIKey = "DEMO_KEY"
+                        appPrefs.requestLimit = "?"
+                        appPrefs.requestRemaining = "?"
+                    } label: {
+                        Text("Reset API-KEY to \"DEMO_KEY\"")
+                    }
                 }
             }
             
