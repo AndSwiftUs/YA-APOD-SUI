@@ -93,7 +93,6 @@ struct APODView: View {
             }
             Text("\(currAPOD.date), \(currAPOD.copyright ?? "no copyright").")
                 .font(.caption)
-            Text(currAPOD.media_type) + Text(currAPOD.url)
             ScrollView {
                 Text(currAPOD.explanation)
                     .font(.body)
