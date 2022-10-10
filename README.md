@@ -6,5 +6,5 @@ It's my diplom project rewritten on SwiftUI: fetching images from NASA servers &
 
 ## Logo
 
-![Logo](/YA%20APOD%20SUI/Utilities/Assets.xcassets/AppIcon.appiconset/nasa-logo-v-02.png)
+![Logo](/YA%20APOD%20SUI/Utilities/Assets.xcassets/AppIcon.appiconset/AppStore%20icon.png)
 
