@@ -91,6 +91,12 @@ struct SearchView: View {
                     }
                 }
             }
+            .refreshable {
+                Task {
+                    try await fetchAPODS(count: countOfRandomAPODs)
+                    try await fetchAPODSImagesInCache()
+                }
+            }
         }
     }
     
